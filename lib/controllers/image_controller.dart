@@ -70,4 +70,10 @@ class ImageController {
       return [];
     }
   }
+    // delete func
+  Future <void> deleteImage(ImageModal image, Function func)async{
+    if (image.imgURL != null){
+
+    }
+  }
 }

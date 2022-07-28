@@ -1,11 +1,9 @@
 import 'dart:io';
 
-import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:imgage_store_1_app/controllers/image_controller.dart';
 import 'package:imgage_store_1_app/model/image_model.dart';
-import 'package:imgage_store_1_app/utils/util_functions.dart';
 import 'package:logger/logger.dart';
 
 class ImagesProvider with ChangeNotifier {
@@ -80,4 +78,5 @@ class ImagesProvider with ChangeNotifier {
     _imageModal = model;
     notifyListeners();
   }
+
 }
