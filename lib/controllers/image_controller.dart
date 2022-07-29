@@ -106,7 +106,7 @@ class ImageController {
         context,
         CoolAlertType.success,
         'Success',
-        'Image Upload is Successfull',
+        'Image Deleted Successfully',
         () {
           Navigator.pushNamed(context, ImageViewScreen.pageKey);
         },

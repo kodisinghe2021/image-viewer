@@ -40,24 +40,31 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
       ),
       body: Stack(
         children: [
-          Container(
-            width: screenSize.width,
-            height: screenSize.height,
-            padding: const EdgeInsets.fromLTRB(10, 20, 10, 15),
-            color: const Color.fromARGB(255, 224, 221, 210),
-            child: GridView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemCount: images.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 2 / 3,
-                mainAxisSpacing: 20,
-                crossAxisSpacing: 10,
-              ),
-              itemBuilder: (context, index) => SingleImageContainer(
-                images: images,
-                screenSize: screenSize,
-                index: index,
+          GestureDetector(
+            onTap:(){
+              setState(() {
+                UtilFunctions.fetchImages(context);
+              });
+            },
+            child: Container(
+              width: screenSize.width,
+              height: screenSize.height,
+              padding: const EdgeInsets.fromLTRB(10, 20, 10, 15),
+              color: const Color.fromARGB(255, 224, 221, 210),
+              child: GridView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: images.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 2 / 3,
+                  mainAxisSpacing: 20,
+                  crossAxisSpacing: 10,
+                ),
+                itemBuilder: (context, index) => SingleImageContainer(
+                  images: images,
+                  screenSize: screenSize,
+                  index: index,
+                ),
               ),
             ),
           ),
