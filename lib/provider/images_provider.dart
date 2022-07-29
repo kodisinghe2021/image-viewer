@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:imgage_store_1_app/controllers/image_controller.dart';
@@ -31,6 +32,7 @@ class ImagesProvider with ChangeNotifier {
 
   // image getter
   File get getIamage => _image;
+
   //---------------------uploading function
   Future<void> selectImage() async {
     try {
@@ -79,4 +81,15 @@ class ImagesProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  // update image
+  Future<void> updateImage(File img, String destination) async {
+    try {
+      await FirebaseStorage.instance.ref(destination).putFile(img);
+      Logger().i('Update success');
+    } catch (e) {
+      Logger().e(e);
+    }
+
+    //  storage.ref(`/images/${imageAsFile.name}`).put(imageAsFile);
+  }
 }

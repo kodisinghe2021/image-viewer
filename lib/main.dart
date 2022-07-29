@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
 
       child: MaterialApp(
         routes: {
-          FullViewScreen.pageKey: (context) => const FullViewScreen(),
+          FullViewScreen.pageKey: (context) => FullViewScreen(),
           ImageViewScreen.pageKey: (context) => const ImageViewScreen(),
           ImageUploadScreen.pageKey: (context) => ImageUploadScreen(),
         },

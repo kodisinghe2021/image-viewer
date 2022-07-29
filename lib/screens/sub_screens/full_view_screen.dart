@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:imgage_store_1_app/controllers/image_controller.dart';
 import 'package:imgage_store_1_app/provider/images_provider.dart';
 import 'package:imgage_store_1_app/screens/main_screens/images_view_screen.dart';
+import 'package:imgage_store_1_app/screens/sub_screens/image_upload_screen.dart';
 import 'package:provider/provider.dart';
 
 class FullViewScreen extends StatelessWidget {
-  const FullViewScreen({Key? key}) : super(key: key);
+  FullViewScreen({Key? key}) : super(key: key);
+
   static const pageKey = '/full_view-screen';
+  final ImageController _imageController = ImageController();
+  // final ImagesProvider _imageProvider = ImagesProvider();
   @override
   Widget build(BuildContext context) {
     final selectedImage = Provider.of<ImagesProvider>(context).getSingleImage;
@@ -18,7 +23,7 @@ class FullViewScreen extends StatelessWidget {
           },
           icon: const Icon(Icons.navigate_before),
         ),
-        title: const Text('Image Full View'),
+        title: Text(selectedImage.title),
       ),
       body: Stack(
         children: [
@@ -46,14 +51,20 @@ class FullViewScreen extends StatelessWidget {
                 children: [
                   const Text("Delete"),
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        await _imageController.deleteImage(
+                            selectedImage.imgDestination, context);
+                        _imageController.deleteDoc(selectedImage.id, context);
+                      },
                       icon: const Icon(Icons.delete, size: 40)),
                   SizedBox(
                     width: screenSize.width * 0.2,
                   ),
                   const Text("Update"),
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, ImageUploadScreen.pageKey,arguments:true);
+                      },
                       icon: const Icon(Icons.upgrade, size: 40)),
                 ],
               ),

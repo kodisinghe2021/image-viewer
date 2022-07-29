@@ -8,16 +8,23 @@ import 'package:imgage_store_1_app/utils/util_functions.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
-class ImageUploadScreen extends StatelessWidget {
-  ImageUploadScreen({Key? key}) : super(key: key);
+class ImageUploadScreen extends StatefulWidget {
+  const ImageUploadScreen({Key? key}) : super(key: key);
 
   static const pageKey = '/image-upload-screen';
 
+  @override
+  State<ImageUploadScreen> createState() => _ImageUploadScreenState();
+}
+
+class _ImageUploadScreenState extends State<ImageUploadScreen> {
   final TextEditingController _inputtitle = TextEditingController();
+
   final ImagePicker _picker = ImagePicker();
 
   //asign empty path for file
   File _image = File("");
+
   //---------------------uploading function
   Future<void> selectImage() async {
     try {
@@ -143,6 +150,10 @@ class ImageUploadScreen extends StatelessWidget {
                             //check title field is empty or not
                             if (_inputtitle.text.isNotEmpty) {
                               value.startSaveBookInfo(_inputtitle.text.trim());
+                              Navigator.pushNamed(
+                                  context, ImageViewScreen.pageKey);
+                              _inputtitle.clear();
+                              value.clearPath();
                               UtilFunctions.showDialogBox(
                                 context,
                                 CoolAlertType.success,
@@ -151,9 +162,6 @@ class ImageUploadScreen extends StatelessWidget {
                                 () {
                                   Navigator.pushNamed(
                                       context, ImageViewScreen.pageKey);
-                                  _inputtitle.clear();
-                                  value.clearPath();
-                                  UtilFunctions.fetchImages(context);
                                 },
                               );
                             } else {
